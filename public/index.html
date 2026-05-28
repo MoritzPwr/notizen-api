@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notizen API - Text Summarization Service</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        .tagline {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+        h2 {
+            color: #764ba2;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        .endpoint {
+            background: #f7f7f7;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .method {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-right: 10px;
+        }
+        .path {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #333;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .info-box strong {
+            color: #1976d2;
+        }
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+    <!-- Vercel Web Analytics -->
+    <script>
+        window.va = window.va || function () { 
+            (window.vaq = window.vaq || []).push(arguments); 
+        };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Notizen API</h1>
+        <p class="tagline">AI-powered text summarization service</p>
+
+        <h2>Overview</h2>
+        <p>
+            Notizen API provides text summarization capabilities powered by Claude AI. 
+            Send text content and receive intelligent summaries tailored to your needs.
+        </p>
+
+        <h2>Endpoints</h2>
+        
+        <div class="endpoint">
+            <div>
+                <span class="method">POST</span>
+                <span class="path">/api/summarize</span>
+            </div>
+            <p style="margin-top: 10px;">Summarize text content using Claude AI.</p>
+        </div>
+
+        <h2>Request Format</h2>
+        <p>Send a POST request with your Anthropic API message format:</p>
+        <pre><code>{
+  "model": "claude-3-5-sonnet-20241022",
+  "max_tokens": 1024,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Your text to summarize here"
+    }
+  ]
+}</code></pre>
+
+        <h2>Headers</h2>
+        <ul>
+            <li><code>Content-Type: application/json</code></li>
+        </ul>
+
+        <h2>Example Usage</h2>
+        <pre><code>fetch('https://your-domain.vercel.app/api/summarize', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    model: 'claude-3-5-sonnet-20241022',
+    max_tokens: 1024,
+    messages: [{
+      role: 'user',
+      content: 'Summarize this text: ...'
+    }]
+  })
+})
+.then(res => res.json())
+.then(data => console.log(data));</code></pre>
+
+        <div class="info-box">
+            <strong>Note:</strong> The API requires a valid Anthropic API key to be configured 
+            in the environment variables (<code>ANTHROPIC_API_KEY</code>).
+        </div>
+
+        <h2>CORS Support</h2>
+        <p>This API supports Cross-Origin Resource Sharing (CORS) and can be called from any domain.</p>
+
+        <h2>Response</h2>
+        <p>
+            The API returns the response directly from Claude AI, including the generated summary 
+            and token usage information.
+        </p>
+
+        <footer>
+            <p>Powered by <a href="https://www.anthropic.com/claude" target="_blank">Claude AI</a> and deployed on <a href="https://vercel.com" target="_blank">Vercel</a></p>
+        </footer>
+    </div>
+</body>
+</html>
